@@ -1,0 +1,206 @@
+:root {
+    --bg-color: #F9F7F2;
+    --card-bg: #FFFFFF;
+    --accent-color: #D4C5B9;
+    --text-color: #5E5A56;
+    --button-hover: #E8E2DC;
+    --toast-bg: #5E5A56;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px; /* カードが増えたので少し広げる */
+    width: 100%;
+    display: grid;
+    /* 画面が広ければ3列、狭ければ1列に自動調整 */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 30px;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+h2 {
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--bg-color);
+    padding-bottom: 8px;
+    color: #A09A94;
+}
+
+.btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+button {
+    background-color: var(--card-bg);
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 8px 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+button:hover { background-color: var(--button-hover); }
+
+button.primary {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+}
+
+/* 「input」だけじゃなく、種類を指定してあげる */
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 24px);
+    padding: 12px;
+    border: 1px solid var(--accent-color);
+    border-radius: 12px;
+    margin-bottom: 15px;
+    background-color: var(--bg-color);
+    outline: none;
+    font-size: 1rem;
+}
+
+#toast {
+    visibility: hidden;
+    background-color: var(--toast-bg);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 50px;
+    position: fixed;
+    left: 50%;
+    bottom: 50px;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: 0.4s;
+}
+
+#toast.show {
+    visibility: visible;
+    opacity: 0.9;
+    bottom: 70px;
+}
+
+/* --- 1. Character Types --- */
+.generator-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.generator-options label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.generator-options input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+    accent-color: var(--accent-color);
+}
+
+.symbol-info {
+    padding: 10px;
+    background: #fdfdfd;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    border: 1px solid #eee;
+    line-height: 1.4;
+}
+
+/* --- 2. Generation Mode --- */
+.mode-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background: #fdfdfd;
+    border: 1px solid var(--accent-color);
+    border-radius: 15px;
+    font-size: 0.85rem;
+}
+
+.mode-selector label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.mode-selector input[type="radio"] {
+    width: auto;
+    height: auto;
+    margin: 0 10px 0 0;
+    padding: 0;
+    accent-color: var(--accent-color);
+}
+
+/* --- 4. Generate Button --- */
+/* すべてのカードのメインボタンを統一 */
+.generate-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: 15px; /* 上に少し余白 */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* ダミー画像プレビューエリアの調整 */
+.image-preview {
+    width: 100%;
+    height: 180px; /* 60pxから180pxに大幅アップ！ */
+    border: 1px dashed var(--accent-color);
+    border-radius: 15px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #A09A94;
+    background-color: #fdfdfd;
+    overflow: hidden; /* はみ出た部分を隠す */
+    transition: all 0.3s ease;
+}
+
+/* プレビュー画像自体のスタイル */
+.image-preview img {
+    max-width: 95%;   /* 少し余白を持たせる */
+    max-height: 95%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* ほんのり影をつけて立体感を */
+    object-fit: contain; /* アスペクト比を維持して収める */
+}
